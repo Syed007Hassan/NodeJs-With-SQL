@@ -17,8 +17,8 @@ const db = mysql.createConnection({
 
 app.get("/", (req, res) => {
 
-   const fName = "Hassan";
-   const lName = "ali";
+   const fName = "Ehtesham";
+   const lName = "Zafar";
 
    
    db.query(
