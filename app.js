@@ -1,46 +1,42 @@
 // dependencies
 const express = require("express");
 const app = express();
+const con = require("./database.js");
 
-const mysql = require('mysql2');
-
-app.use(express.static('public'));
-
-const db = mysql.createConnection({
-  host: 'localhost:3306',
-  user: 'root',
-  password: 'Hppavilion15',
-  database: 'TestDb'
-});
-
-
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
+  let sql = "SELECT * FROM USERS";
 
-   const fName = "Hassan";
-   const lName = "ali";
-
-   
-   db.query(
-    'INSERT INTO users (fName,lName) VALUES ("Hassan","Ali")',
+  con.query(
+    'INSERT INTO USERS (fName,lName) VALUES ("Luka","Modric")',
     (err, result) => {
       if (err) {
         console.log(err);
-      } else {
-        res.send("Values Inserted");
       }
     }
   );
 
-
-
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
 });
-
-
 
 // PORT
 const PORT = 3000;
 
 app.listen(PORT, () => {
-   console.log(`Server is running on PORT: ${PORT}`);
+  console.log(`Server is running on PORT: ${PORT}`);
+
+  con.connect((err) => {
+    if (err) {
+      console.log("Error connecting to Db");
+      return;
+    }
+    console.log("Connected!");
+  });
 });
