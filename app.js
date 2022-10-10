@@ -16,7 +16,14 @@ app.get("/", (req, res) => {
       }
     }
   );
-
+con.query(
+  'INSERT INTO USERS (fName,lName) VALUES ("ANAS",BAQAI')',
+  (err,result)=>{
+  if(err){
+    console.log(err);
+  }
+}
+);
   con.query(sql, (err, result) => {
     if (err) {
       console.log(err);
